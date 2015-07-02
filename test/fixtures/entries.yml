@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  content: MyString
+  user_id: 1
+  positive: false
+  negative: false
+  intensity: 1
+
+two:
+  title: MyString
+  content: MyString
+  user_id: 1
+  positive: false
+  negative: false
+  intensity: 1
