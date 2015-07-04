@@ -12,10 +12,6 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.number_field :user_id %>
-  </div>
-  <div class="field">
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div>
@@ -24,6 +20,8 @@
     <%= f.text_field :content %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Submit',:class => "btn btn-primary" %>
+    <%= link_to 'Back', entries_path, class: "btn btn-default" %>
+
   </div>
 <% end %>
