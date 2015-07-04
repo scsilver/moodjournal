@@ -1,6 +1,16 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Entries</h1>
+
+
+<%= form_tag entries_path, method: :get do %>
+  <p>
+    <%= text_field_tag :query, params[:query] %>
+    <%= submit_tag "Search", name: nil %>
+  </p>
+<% end %>
+
+
 <div class= "col-sm-8">
   <% @entries.each do |entry| %>
         
