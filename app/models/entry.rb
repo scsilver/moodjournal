@@ -3,7 +3,6 @@ class Entry < ActiveRecord::Base
 
 	validates :title, presence: true
 	validates :content, presence: true
-	validates :user_id, presence: true
 
     include Tire::Model::Search
     include Tire::Model::Callbacks
