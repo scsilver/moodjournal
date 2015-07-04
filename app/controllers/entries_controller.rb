@@ -1,16 +1,10 @@
 class EntriesController < ApplicationController
   before_action :set_entry, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
 
   # GET /entries
   # GET /entries.json
   def index
-    if params[:query].present?
-      @entries = Entry.search(params[:query])
-    else
-      @entries = Entry.all
-    end
-
+    @entries = Entry.all
   end
 
   # GET /entries/1
@@ -31,7 +25,9 @@ class EntriesController < ApplicationController
   # POST /entries.json
   def create
     @entry = Entry.new(entry_params)
-    @entry.user_id = current_user.id
+    MoodAnalyzer.new(@entry).analyze
+
+
     respond_to do |format|
       if @entry.save
         format.html { redirect_to @entry, notice: 'Entry was successfully created.' }
@@ -46,6 +42,8 @@ class EntriesController < ApplicationController
   # PATCH/PUT /entries/1
   # PATCH/PUT /entries/1.json
   def update
+    MoodAnalyzer.new(@entry).analyze
+
     respond_to do |format|
       if @entry.update(entry_params)
         format.html { redirect_to @entry, notice: 'Entry was successfully updated.' }
@@ -75,6 +73,6 @@ class EntriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def entry_params
-      params.require(:entry).permit(:title, :content, :user_id, :positive, :negative, :intensity)
+      params.require(:entry).permit(:user_id, :title, :content)
     end
 end

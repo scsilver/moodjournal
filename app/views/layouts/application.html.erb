@@ -6,11 +6,40 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
-<ul class="hmenu">
-    <%= render 'layouts/user_auth_items' %>
-  </ul>
-<%= yield %>
+<div class="header">
+	<div class="container-fluid head">
+		<div class="row head">
+			<div class="col-md-1 head">
+		<%= render 'layouts/user_auth_items' %>
+	</div>
+	<div class="col-md-8">
+	</div>
+				<div class="col-md-3 head">
+					<H4>Mood Journal</H4>
 
-</body>
+	</div>
+	</div>
+</div>
+</div>
+
+<div class="body-entry">
+	
+	
+	<div class="push">
+	</div>
+	<div class="container-fluid">
+	  	<div class="row">
+	  		<div class="col-md-1">
+		  		</div>
+		  			<div class="col-md-10">
+		  				<div class="pageedge">
+		  				<div class="page">
+	  						<%= yield %>
+		  				</div>
+		  			</div>
+		  			</div>
+		  		<div class="col-md-1">
+		  	</div>
+	    </div>
+	</div>
 </html>

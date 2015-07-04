@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150702003138) do
+ActiveRecord::Schema.define(version: 20150702005527) do
 
   create_table "entries", force: :cascade do |t|
     t.string   "title"
@@ -20,6 +20,11 @@ ActiveRecord::Schema.define(version: 20150702003138) do
     t.boolean  "positive"
     t.boolean  "negative"
     t.integer  "intensity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "mood_analyzers", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

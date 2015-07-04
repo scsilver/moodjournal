@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>User:</strong>
+  <%= @entry.user_id %>
+</p>
+
+<p>
   <strong>Title:</strong>
   <%= @entry.title %>
 </p>
@@ -8,26 +13,6 @@
 <p>
   <strong>Content:</strong>
   <%= @entry.content %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @entry.user_id %>
-</p>
-
-<p>
-  <strong>Positive:</strong>
-  <%= @entry.positive %>
-</p>
-
-<p>
-  <strong>Negative:</strong>
-  <%= @entry.negative %>
-</p>
-
-<p>
-  <strong>Intensity:</strong>
-  <%= @entry.intensity %>
 </p>
 
 <%= link_to 'Edit', edit_entry_path(@entry) %> |
