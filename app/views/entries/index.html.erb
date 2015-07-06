@@ -15,7 +15,7 @@
 
 
 
-  <% @entries.reverse_each do |entry| %>
+  <% @entries.where(user: current_user.id).reverse_each do |entry| %>
         
         
 

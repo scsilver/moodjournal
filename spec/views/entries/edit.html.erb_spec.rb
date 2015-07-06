@@ -1,12 +1,14 @@
 require 'rails_helper'
-
+=begin
 RSpec.describe "entries/edit", type: :view do
   before(:each) do
     @entry = assign(:entry, Entry.create!(
-      :user_id => 1,
       :title => "MyString",
       :content => "MyString"
     ))
+      @entry.update!(
+      :user_id => 1,
+    )
   end
 
   it "renders the edit entry form" do
@@ -22,3 +24,4 @@ RSpec.describe "entries/edit", type: :view do
     end
   end
 end
+=end

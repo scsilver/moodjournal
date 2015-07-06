@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe MoodAnalyzer do
-	
+	before(:each ) do
+		sign_in current_user
   	it "has a valid factory" do
   		FactoryGirl.create(:entry).should be_valid
   	end
@@ -43,5 +44,5 @@ describe MoodAnalyzer do
 				entry.intensity.should == 1
 			end
 		end
-
+	end
 end
