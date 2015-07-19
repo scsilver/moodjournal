@@ -1,14 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Entries <%= link_to 'New Entry', new_entry_path, class: "btn btn-primary no-pad" %>
+<h1>My Latest Entries <%= link_to 'New Entry', new_entry_path, class: "btn btn-primary no-pad" %>
 </h1>
 
-<%= form_tag entries_path, method: :get do %>
-  <p>
-    <%= text_field_tag :query, params[:query] %>
-    <%= submit_tag "Search", name: nil %>
-  </p>
-<% end %>
 
 
 <div class= "col-sm-8">
@@ -16,8 +10,8 @@
 
 
   <% @entries.where(user: current_user.id).reverse_each do |entry| %>
-        
-        
+
+
 
   <div class="pageedge">
     <div class="row">
@@ -25,7 +19,7 @@
  <h4><%= entry.title %></h4>
  <%= entry.content%>
 
-                 
+
             <div class="row">
                <p class="timetext">
                   <%= if entry.updated_at == entry.created_at
@@ -42,8 +36,8 @@
         <%= link_to 'Edit', edit_entry_path(entry), class: "btn btn-info" %>
        <%= link_to 'Destroy', entry, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
         </div>
-     
-                
+
+
 
 </div>
 
@@ -63,7 +57,7 @@
         <div class="container-fluid">
         <%= entry.content %>
         <p class="timetext">
-                  <%= 
+                  <%=
                  distance_of_time_in_words(entry.created_at, Time.now) + " ago"
                  %></p>
         </div>
