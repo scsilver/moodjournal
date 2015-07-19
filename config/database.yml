@@ -13,8 +13,11 @@ test: &TEST
   pool: 5
   username:
   password:
+
 production:
-  adapter:
-  host:
-  username: 
-  database:
+  adapter: postgresql
+  encoding: utf8
+  database: project_production
+  pool: 5
+  username:
+  password:
