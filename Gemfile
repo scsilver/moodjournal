@@ -7,6 +7,9 @@ gem 'rails', '4.2.3'
 
 group :production do
   gem 'pg'
+  gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
+gem 'bonsai-elasticsearch-rails'
 
 end
 
