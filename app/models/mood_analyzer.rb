@@ -1,4 +1,4 @@
-class MoodAnalyzer 
+class MoodAnalyzer
     def initialize(entry)
 		@entry = entry
 
@@ -32,7 +32,7 @@ class MoodAnalyzer
 			@entry.negative = true
 			@entry.positive = false
 		end
-		if sum == 0 
+		if sum == 0
 			@entry.negative = false
 			@entry.positive = false
 		end
