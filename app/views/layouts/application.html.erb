@@ -64,11 +64,11 @@
       document.getElementById("class").innerHTML = data.prediction;
       document.getElementById("prob").innerHTML = "Probability Negative: "+ data.probabilityn + "|| Probability Positive: "+  data.probabilityp;
       if (data.prediction == 'negative') {
-        $.ajax({type: "PATCH", url: window.location.pathname , data: { "negative":true, "positive":false, "intensity":data.probabilityn},cache: false,});
+        $.ajax({type: "PATCH", url: window.location.pathname , data: { "negative":true, "positive":false, "intensity":parseFloat(data.probabilityn)},cache: false,});
         $('#setter').load(document.URL +  ' #setter');
       }
       if (data.prediction == 'positive') {
-        $.ajax({type: "PATCH", url: window.location.pathname , data: { "negative":false, "positive":true, "intensity":data.probabilityp},cache: false,});
+        $.ajax({type: "PATCH", url: window.location.pathname , data: { "negative":false, "positive":true, "intensity":parseFloat(data.probabilityp)},cache: false,});
         $('#setter').load(document.URL +  ' #setter');
 
       }
