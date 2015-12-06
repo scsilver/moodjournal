@@ -6,7 +6,7 @@ class CreateEntries < ActiveRecord::Migration
       t.integer :user_id
       t.boolean :positive
       t.boolean :negative
-      t.integer :intensity
+      t.float :intensity
 
       t.timestamps null: false
     end

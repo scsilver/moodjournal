@@ -20,72 +20,8 @@
     <%= f.text_area :content, :cols => "100", :rows => "10", id: "entry"%>
   </div>
   <div class="actions">
-    <%= f.submit 'Submit',:class => "btn btn-primary", id: "btnClick" %>
+    <%= f.submit 'Submit',type: "submit",:class => "btn btn-primary", id: "btnClick" %>
     <%= link_to 'Back', entries_path, class: "btn btn-default" %>
 
   </div>
 <% end %>
-
-
-<script src="https://js.pusher.com/3.0/pusher.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-
-
-<title>Pusher Test</title>
-<script src="https://js.pusher.com/3.0/pusher.min.js"></script>
-<script>
-  // Enable pusher logging - don't include this in production
-  Pusher.log = function(message) {
-    if (window.console && window.console.log) {
-      window.console.log(message);
-    }
-  };
-
-  var pusher = new Pusher('60dbe63931b29368c58c', {
-    encrypted: true
-  });
-  var channel = pusher.subscribe('result_channel');
-  channel.bind('result_event', function(data) {
-    document.getElementById("class").innerHTML = data.prediction;
-
-    document.getElementById("prob").innerHTML = "Probability Negative: "+ data.probabilityn + "|| Probability Positive: "+  data.probabilityp;
-
-
-
-  });
-</script>
-<script>
-$( "#btnClick" ).click(function() {
-  console.log( "Handler for .click() called." );
-
-  var entry = $('#entry').val();
-  var triggered = channel.trigger('client-command-event',  entry);
-});
-$( "#humidtext" ).keypress(function() {
-  if ( event.which == 13 ) {
-
-    console.log( "Handler for .keypress() called." );
-
-      var entry = $('#entry').val();
-      var triggered = channel.trigger('client-command-event',  entry);
-
-    }
-});
-
-</script>
-<script>
-    // Enable pusher logging - don't include this in production
-    Pusher.log = function(message) {
-      if (window.console && window.console.log) {
-        window.console.log(message);
-      }
-    };
-
-    var pusher = new Pusher('60dbe63931b29368c58c', {
-      encrypted: true
-    });
-    var channel = pusher.subscribe('private-command');
-    channel.bind('client-command-event', function(data) {
-      alert(data.message);
-    });
-  </script>

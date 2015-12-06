@@ -12,7 +12,7 @@ def index
     @entries = Entry.all
     end
   end
-  
+
 
   # GET /entries/1
   # GET /entries/1.json
@@ -33,7 +33,7 @@ def index
   def create
     @entry = Entry.new(entry_params)
      @entry.user_id = current_user.id
-    MoodAnalyzer.new(@entry).analyze
+    #MoodAnalyzer.new(@entry).analyze
 
 
     respond_to do |format|
@@ -50,11 +50,10 @@ def index
   # PATCH/PUT /entries/1
   # PATCH/PUT /entries/1.json
   def update
-    MoodAnalyzer.new(@entry).analyze
-
+    #MoodAnalyzer.new(@entry).analyze
     respond_to do |format|
-      if @entry.update(entry_params)
-        format.html { redirect_to @entry, notice: 'Entry was successfully updated.' }
+      if @entry.update(update_params)
+        format.html { redirect_to @entry, status: 303, notice: 'Entry was successfully updated.' }
         format.json { render :show, status: :ok, location: @entry }
       else
         format.html { render :edit }
@@ -81,6 +80,9 @@ def index
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def entry_params
-      params.require(:entry).permit(:user_id, :title, :content)
+      params.require(:entry).permit(:user_id, :title, :content, :intensity, :negative, :positive)
+    end
+    def update_params
+      params.permit(:user_id, :title, :content, :intensity, :negative, :positive, :id)
     end
 end

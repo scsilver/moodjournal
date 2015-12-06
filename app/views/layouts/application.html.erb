@@ -5,6 +5,9 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <script src="https://js.pusher.com/3.0/pusher.min.js"></script>
+
+
 </head>
 <div class="header">
 	<div class="container-fluid head">
@@ -23,8 +26,8 @@
 </div>
 
 <div class="body-entry">
-	
-	
+
+
 	<div class="push">
 	</div>
 	<div class="container-fluid">
@@ -42,4 +45,72 @@
 		  	</div>
 	    </div>
 	</div>
+  <script>
+  var count = 0
+    // Enable pusher logging - don't include this in production
+    Pusher.log = function(message) {
+      if (window.console && window.console.log) {
+        window.console.log(message);
+      }
+    };
+
+    var pusher = new Pusher('60dbe63931b29368c58c', {
+      encrypted: true
+    });
+    var channel = pusher.subscribe('result_channel');
+
+    channel.bind('result_event', function(data) {
+      if (count == 0){
+      document.getElementById("class").innerHTML = data.prediction;
+      document.getElementById("prob").innerHTML = "Probability Negative: "+ data.probabilityn + "|| Probability Positive: "+  data.probabilityp;
+      if (data.prediction == 'negative') {
+        $.ajax({type: "PATCH", url: window.location.pathname , data: { "negative":true, "positive":false, "intensity":data.probabilityn},cache: false,});
+        $('#setter').load(document.URL +  ' #setter');
+      }
+      if (data.prediction == 'positive') {
+        $.ajax({type: "PATCH", url: window.location.pathname , data: { "negative":false, "positive":true, "intensity":data.probabilityp},cache: false,});
+        $('#setter').load(document.URL +  ' #setter');
+
+      }
+        count++
+      }
+
+
+    });
+  </script>
+  <script>
+  $( "#btnClick" ).click(function() {
+    console.log( "Handler for .click() called." );
+    count = 0
+    var entry = $('#entry').val();
+    var triggered = channel.trigger('client-command-event',  entry);
+  });
+  $( "#btnClick" ).keypress(function() {
+    if ( event.which == 13 ) {
+
+      console.log( "Handler for .keypress() called." );
+        count = 0
+
+        var entry = $('#entry').val();
+        var triggered = channel.trigger('client-command-event',  entry);
+
+      }
+  });
+
+  </script>
+  <script>
+      // Enable pusher logging - don't include this in production
+      Pusher.log = function(message) {
+        if (window.console && window.console.log) {
+          window.console.log(message);
+        }
+      };
+
+      var pusher = new Pusher('60dbe63931b29368c58c', {
+        encrypted: true
+      });
+      var channel = pusher.subscribe('private-command');
+      channel.bind('client-command-event', function(data) {
+      });
+    </script>
 </html>
