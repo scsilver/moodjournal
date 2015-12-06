@@ -70,6 +70,8 @@ def index
       format.html { redirect_to entries_url, notice: 'Entry was successfully destroyed.' }
       format.json { head :no_content }
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!('entries')
+
   end
 
   private
