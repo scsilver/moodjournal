@@ -66,11 +66,12 @@ def index
   # DELETE /entries/1.json
   def destroy
     @entry.destroy
+    ActiveRecord::Base.connection.reset_pk_sequence!('entries')
+
     respond_to do |format|
       format.html { redirect_to entries_url, notice: 'Entry was successfully destroyed.' }
       format.json { head :no_content }
     end
-    ActiveRecord::Base.connection.reset_pk_sequence!('entries')
 
   end
 
