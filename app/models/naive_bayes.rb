@@ -2,18 +2,17 @@ require 'descriptive_statistics'
 
 class NaiveBayes
 
-  def initialize(data_train)
-    dimension = 3
+  def initialize()
     @data_train = InquirerClassDatabase.all
   #  @dimension = dimension
   end
 
   def num_classes
-    return @data_train.length
+    return (@data_train.column_names - ["id"]).length
   end
 
   def classes
-    return @data_train.column_names
+    return (@data_train.column_names - ["id"])
   end
 
   def feature_set(index, class_name)
@@ -59,13 +58,12 @@ class NaiveBayes
   def class_probability(feature_values, class_name)
     class_fraction = 1.0/num_classes
     class_features = []
-
+    feature_values = feature_values.split
     #feature_bayes = feature_mult(feature_values, class_name)
     class_count = @data_train.where("#{class_name} IS NOT NULL").count
     @data_train.where("#{class_name} IS NOT NULL").each do |n|
       class_features.append(n[class_name])
     end
-
 
     prob_class = ((class_features & feature_values).count.to_f)/class_count.to_f
     res = prob_class
@@ -74,12 +72,15 @@ class NaiveBayes
   end
 
   def classify(feature_values)
-    l=0
-    res = classes.sort_by do |class_name|
-      l = class_probability(feature_values, class_name)
+    result_array=Hash.new()
 
+    res = classes.sort_by do |class_name|
+      result_array.store(class_name,(class_probability(feature_values, class_name)))
     end
 
-    return res[-1].to_s + " " + l.to_s
+    result_array = result_array.sort_by {|_key, value| value}.reverse
+    result_array = result_array.to_h
+    return result_array
+
   end
 end

@@ -11,7 +11,6 @@ def index
     else
     @entries = Entry.all
     end
-    binding.pry
   end
 
 
@@ -23,6 +22,7 @@ def index
   # GET /entries/new
   def new
     @entry = Entry.new
+
   end
 
   # GET /entries/1/edit
@@ -35,7 +35,17 @@ def index
     @entry = Entry.new(entry_params)
      @entry.user_id = current_user.id
     #MoodAnalyzer.new(@entry).analyze
-
+    @naivebayes = NaiveBayes.new()
+    classify  = @naivebayes.classify(@entry.content)
+    if classify["negative"] > classify["positive"]
+      @entry.negative = true
+      @entry.positive = false
+      @entry.intensity = classify["negative"]
+    elsif classify["negative"] < classify["positive"]
+      @entry.positive = true
+      @entry.negative = false
+      @entry.intensity = classify["positive"]
+    end
 
     respond_to do |format|
       if @entry.save
