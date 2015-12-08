@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150702001226) do
+ActiveRecord::Schema.define(version: 20151208014529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,39 @@ ActiveRecord::Schema.define(version: 20150702001226) do
     t.boolean  "positive"
     t.boolean  "negative"
     t.float    "intensity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "inquirer_class_databases", force: :cascade do |t|
+    t.string   "positive"
+    t.string   "negative"
+    t.string   "support"
+    t.string   "hostile"
+    t.string   "strong"
+    t.string   "power"
+    t.string   "weak"
+    t.string   "submit"
+    t.string   "active"
+    t.string   "passive"
+    t.string   "pleasure"
+    t.string   "pain"
+    t.string   "feel"
+    t.string   "arousal"
+    t.string   "emote"
+    t.string   "virtue"
+    t.string   "vice"
+    t.string   "ovrst"
+    t.string   "undrst"
+    t.string   "academ"
+    t.string   "doctrin"
+    t.string   "econ"
+    t.string   "exch"
+    t.string   "expressive"
+    t.string   "legal"
+    t.string   "milit"
+    t.string   "politic"
+    t.string   "religion"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

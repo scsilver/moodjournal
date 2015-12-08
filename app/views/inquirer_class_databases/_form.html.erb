@@ -1,0 +1,129 @@
+<%= form_for(@inquirer_class_database) do |f| %>
+  <% if @inquirer_class_database.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@inquirer_class_database.errors.count, "error") %> prohibited this inquirer_class_database from being saved:</h2>
+
+      <ul>
+      <% @inquirer_class_database.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :positive %><br>
+    <%= f.text_field :positive %>
+  </div>
+  <div class="field">
+    <%= f.label :negative %><br>
+    <%= f.text_field :negative %>
+  </div>
+  <div class="field">
+    <%= f.label :support %><br>
+    <%= f.text_field :support %>
+  </div>
+  <div class="field">
+    <%= f.label :hostile %><br>
+    <%= f.text_field :hostile %>
+  </div>
+  <div class="field">
+    <%= f.label :strong %><br>
+    <%= f.text_field :strong %>
+  </div>
+  <div class="field">
+    <%= f.label :power %><br>
+    <%= f.text_field :power %>
+  </div>
+  <div class="field">
+    <%= f.label :weak %><br>
+    <%= f.text_field :weak %>
+  </div>
+  <div class="field">
+    <%= f.label :submit %><br>
+    <%= f.text_field :submit %>
+  </div>
+  <div class="field">
+    <%= f.label :active %><br>
+    <%= f.text_field :active %>
+  </div>
+  <div class="field">
+    <%= f.label :passive %><br>
+    <%= f.text_field :passive %>
+  </div>
+  <div class="field">
+    <%= f.label :pleasure %><br>
+    <%= f.text_field :pleasure %>
+  </div>
+  <div class="field">
+    <%= f.label :pain %><br>
+    <%= f.text_field :pain %>
+  </div>
+  <div class="field">
+    <%= f.label :feel %><br>
+    <%= f.text_field :feel %>
+  </div>
+  <div class="field">
+    <%= f.label :arousal %><br>
+    <%= f.text_field :arousal %>
+  </div>
+  <div class="field">
+    <%= f.label :emote %><br>
+    <%= f.text_field :emote %>
+  </div>
+  <div class="field">
+    <%= f.label :virtue %><br>
+    <%= f.text_field :virtue %>
+  </div>
+  <div class="field">
+    <%= f.label :vice %><br>
+    <%= f.text_field :vice %>
+  </div>
+  <div class="field">
+    <%= f.label :ovrst %><br>
+    <%= f.text_field :ovrst %>
+  </div>
+  <div class="field">
+    <%= f.label :undrst %><br>
+    <%= f.text_field :undrst %>
+  </div>
+  <div class="field">
+    <%= f.label :academ %><br>
+    <%= f.text_field :academ %>
+  </div>
+  <div class="field">
+    <%= f.label :doctrin %><br>
+    <%= f.text_field :doctrin %>
+  </div>
+  <div class="field">
+    <%= f.label :econ %><br>
+    <%= f.text_field :econ %>
+  </div>
+  <div class="field">
+    <%= f.label :exch %><br>
+    <%= f.text_field :exch %>
+  </div>
+  <div class="field">
+    <%= f.label :expressive %><br>
+    <%= f.text_field :expressive %>
+  </div>
+  <div class="field">
+    <%= f.label :legal %><br>
+    <%= f.text_field :legal %>
+  </div>
+  <div class="field">
+    <%= f.label :milit %><br>
+    <%= f.text_field :milit %>
+  </div>
+  <div class="field">
+    <%= f.label :politic %><br>
+    <%= f.text_field :politic %>
+  </div>
+  <div class="field">
+    <%= f.label :religion %><br>
+    <%= f.text_field :religion %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

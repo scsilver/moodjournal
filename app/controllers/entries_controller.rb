@@ -11,6 +11,7 @@ def index
     else
     @entries = Entry.all
     end
+    binding.pry
   end
 
 

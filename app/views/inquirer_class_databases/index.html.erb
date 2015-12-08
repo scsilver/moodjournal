@@ -1,0 +1,81 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Inquirer Class Databases</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Positive</th>
+      <th>Negative</th>
+      <th>Support</th>
+      <th>Hostile</th>
+      <th>Strong</th>
+      <th>Power</th>
+      <th>Weak</th>
+      <th>Submit</th>
+      <th>Active</th>
+      <th>Passive</th>
+      <th>Pleasure</th>
+      <th>Pain</th>
+      <th>Feel</th>
+      <th>Arousal</th>
+      <th>Emote</th>
+      <th>Virtue</th>
+      <th>Vice</th>
+      <th>Ovrst</th>
+      <th>Undrst</th>
+      <th>Academ</th>
+      <th>Doctrin</th>
+      <th>Econ</th>
+      <th>Exch</th>
+      <th>Expressive</th>
+      <th>Legal</th>
+      <th>Milit</th>
+      <th>Politic</th>
+      <th>Religion</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @inquirer_class_databases.each do |inquirer_class_database| %>
+      <tr>
+        <td><%= inquirer_class_database.positive %></td>
+        <td><%= inquirer_class_database.negative %></td>
+        <td><%= inquirer_class_database.support %></td>
+        <td><%= inquirer_class_database.hostile %></td>
+        <td><%= inquirer_class_database.strong %></td>
+        <td><%= inquirer_class_database.power %></td>
+        <td><%= inquirer_class_database.weak %></td>
+        <td><%= inquirer_class_database.submit %></td>
+        <td><%= inquirer_class_database.active %></td>
+        <td><%= inquirer_class_database.passive %></td>
+        <td><%= inquirer_class_database.pleasure %></td>
+        <td><%= inquirer_class_database.pain %></td>
+        <td><%= inquirer_class_database.feel %></td>
+        <td><%= inquirer_class_database.arousal %></td>
+        <td><%= inquirer_class_database.emote %></td>
+        <td><%= inquirer_class_database.virtue %></td>
+        <td><%= inquirer_class_database.vice %></td>
+        <td><%= inquirer_class_database.ovrst %></td>
+        <td><%= inquirer_class_database.undrst %></td>
+        <td><%= inquirer_class_database.academ %></td>
+        <td><%= inquirer_class_database.doctrin %></td>
+        <td><%= inquirer_class_database.econ %></td>
+        <td><%= inquirer_class_database.exch %></td>
+        <td><%= inquirer_class_database.expressive %></td>
+        <td><%= inquirer_class_database.legal %></td>
+        <td><%= inquirer_class_database.milit %></td>
+        <td><%= inquirer_class_database.politic %></td>
+        <td><%= inquirer_class_database.religion %></td>
+        <td><%= link_to 'Show', inquirer_class_database %></td>
+        <td><%= link_to 'Edit', edit_inquirer_class_database_path(inquirer_class_database) %></td>
+        <td><%= link_to 'Destroy', inquirer_class_database, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Inquirer class database', new_inquirer_class_database_path %>

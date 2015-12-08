@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :inquirer_class_databases
   resources :entries
   devise_for :users
   resources :entries

@@ -1,0 +1,33 @@
+FactoryGirl.define do
+  factory :inquirer_class_database do
+    positive "MyString"
+negative "MyString"
+support "MyString"
+hostile "MyString"
+strong "MyString"
+power "MyString"
+weak "MyString"
+submit "MyString"
+active "MyString"
+passive "MyString"
+pleasure "MyString"
+pain "MyString"
+feel "MyString"
+arousal "MyString"
+emote "MyString"
+virtue "MyString"
+vice "MyString"
+ovrst "MyString"
+undrst "MyString"
+academ "MyString"
+doctrin "MyString"
+econ "MyString"
+exch "MyString"
+expressive "MyString"
+legal "MyString"
+milit "MyString"
+politic "MyString"
+religion "MyString"
+  end
+
+end

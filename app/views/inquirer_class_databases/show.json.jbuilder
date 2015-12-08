@@ -1,0 +1,1 @@
+json.extract! @inquirer_class_database, :id, :positive, :negative, :support, :hostile, :strong, :power, :weak, :submit, :active, :passive, :pleasure, :pain, :feel, :arousal, :emote, :virtue, :vice, :ovrst, :undrst, :academ, :doctrin, :econ, :exch, :expressive, :legal, :milit, :politic, :religion, :created_at, :updated_at
