@@ -5,7 +5,7 @@
   <%= @entry.title %>
 </p>
 
-<p>
+<p id= "result">
   <strong>Content:</strong>
   <%= @entry.content %>
 </p>
@@ -13,6 +13,8 @@
   <p id="setter">
     <strong>Negative:</strong>
     <%= @entry.negative %>
+    <% class_name = "negative" %>
+
   </p>
   <p id="setter">
 
@@ -27,6 +29,7 @@
 <p id="setter">
   <strong>Positive:</strong>
   <%= @entry.positive %>
+  <% class_name = "positive" %>
   <strong>Intensity:</strong>
 
   <%= @entry.intensity %>
@@ -36,6 +39,14 @@
   <p id="class">Wait for sentiment classification</p>
   <p id="prob"></p>
 <%end%>
+<% class_features = [] %>
+<% data = InquirerClassDatabase.all %>
+<% data.where("#{class_name} IS NOT NULL").each do |n| %>
+<%    class_features.append(n[class_name]) %>
+<% end %>
+<p style="visibility: hidden" id="hidden_array">
+  <%=class_features%>
+</p>
 
 
 

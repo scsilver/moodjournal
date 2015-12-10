@@ -31,7 +31,7 @@ class NaiveBayes
   #  fs_std = fs.standard_deviation
     #fs_mean = fs.mean
     #fs_var = fs.variance
-    feature_values & corpus
+    #feature_values & corpus
     #if fs_std == 0
     #  return fs_mean == value ? 1.0 : 0.0
     #end
@@ -64,8 +64,9 @@ class NaiveBayes
     @data_train.where("#{class_name} IS NOT NULL").each do |n|
       class_features.append(n[class_name])
     end
+    prob_prior = class_features.count.to_f/@data_train.count.to_f
+    prob_class = (((class_features & feature_values).count.to_f)+1)/(class_count.to_f+@data_train.count.to_f)
 
-    prob_class = ((class_features & feature_values).count.to_f)/class_count.to_f
     res = prob_class
     print class_name.to_s + " " + prob_class.to_s
     return res

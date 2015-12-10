@@ -1,75 +1,62 @@
 <p id="notice"><%= notice %></p>
 
-<h1>My Latest Entries <%= link_to 'New Entry', new_entry_path, class: "btn btn-primary no-pad" %>
+<h1>My Latest Entries
+  <%= link_to 'New Entry', new_entry_path, class: "btn btn-primary no-pad" %>
 </h1>
 
+<div class="col-sm-8">
 
-
-<div class= "col-sm-8">
-
-
-
-  <% @entries.where(user: current_user.id).reverse_each do |entry| %>
-
-
+  <% @entries.where(user: current_user.id).order(updated_at: :desc ).each do |entry| %>
 
   <div class="pageedge">
     <div class="row">
-   <div class= "col-sm-10">
- <h4><%= entry.title %></h4>
- <%= entry.content%>
+      <div class="col-sm-10">
+        <h4><%= entry.title %></h4>
+        <%= entry.content%>
 
-
-            <div class="row">
-               <p class="timetext">
-                  <%= if entry.updated_at == entry.created_at
+        <div class="row">
+          <p class="timetext">
+            <%= if entry.updated_at == entry.created_at
                  "Created "+distance_of_time_in_words(entry.created_at, Time.now) + " ago"
                 else
                  "Updated "+distance_of_time_in_words(entry.created_at, Time.now) + " ago"
                end%></p>
-             </div>
-</div>
+        </div>
+      </div>
 
-        <div class="col-sm-2">
+      <div class="col-sm-2">
 
         <%= link_to 'Show', entry, class: "btn btn-primary" %>
         <%= link_to 'Edit', edit_entry_path(entry), class: "btn btn-info" %>
-       <%= link_to 'Destroy', entry, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
-        </div>
+        <%= link_to 'Destroy', entry, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+      </div>
 
+    </div>
 
-
-</div>
-
-</div>
-<% end %>
+  </div>
+  <% end %>
 
 </div>
 
+<div class="col-sm-4">
+  <div class="pageedge">
 
-
-<div class= "col-sm-4">
-   <div class="pageedge">
-
-    <h2> Recent Entries </h2>
-      <% @entries.reverse_each do |entry| %>
-      <div class="row">
-        <div class="container-fluid">
+    <h2>
+      Recent Entries
+    </h2>
+    <% @entries.order(updated_at: :desc ).each do |entry| %>
+    <div class="row">
+      <div class="container-fluid">
         <%= entry.content %>
         <p class="timetext">
-                  <%=
+          <%=
                  distance_of_time_in_words(entry.created_at, Time.now) + " ago"
                  %></p>
-        </div>
-        </div>
+      </div>
+    </div>
 
-       <%end%>
+    <%end%>
+  </div>
+
+  <div class="row"></div>
 </div>
-
-
-
-  <div class="row">
-
-
-  </div>
-  </div>

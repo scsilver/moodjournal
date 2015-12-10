@@ -113,4 +113,22 @@
       channel.bind('client-command-event', function(data) {
       });
     </script>
+    <script>
+    $(document).ready(function (e) {
+    var strArray = eval($("#hidden_array")[0].innerHTML);
+        var tmp = [];
+        var stmt = $("#result")[0].innerHTML;
+        var stmt_arry = stmt.split(" ");
+        $.each(strArray, function (i, vals) {
+            $.each(stmt_arry, function (j, sVal) {
+                if (sVal == vals) {
+                    stmt_arry[j] = "<b>" + sVal + "</b>";
+                }
+            });
+        });
+        var req_stmt = stmt_arry.join(" ");
+        $("#result").html(req_stmt);
+
+        });
+</script>
 </html>
