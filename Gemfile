@@ -8,9 +8,6 @@ gem 'descriptive_statistics', '~> 2.4.0', :require => 'descriptive_statistics/sa
 
 group :production do
   gem 'pg'
-  gem 'elasticsearch-model'
-gem 'elasticsearch-rails'
-gem 'bonsai-elasticsearch-rails'
 
 end
 
