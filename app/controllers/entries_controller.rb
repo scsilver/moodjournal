@@ -6,8 +6,11 @@ class EntriesController < ApplicationController
 
 
 def index
-  if params[:query].present?
-    @entries = Entry.search(params[:query])
+
+
+    if params[:query].present?
+
+      @entries = Entry.search(params[:query])
     else
     @entries = Entry.all
     end
@@ -62,9 +65,23 @@ def index
   # PATCH/PUT /entries/1.json
   def update
     #MoodAnalyzer.new(@entry).analyze
+    @entry = Entry.find(params[:id])
+    @naivebayes = NaiveBayes.new()
+    classify  = @naivebayes.classify(@entry.content)
+    if classify["negative"] > classify["positive"]
+      @entry.negative = true
+      @entry.positive = false
+      @entry.intensity = classify["negative"]
+    elsif classify["negative"] < classify["positive"]
+      @entry.positive = true
+      @entry.negative = false
+      @entry.intensity = classify["positive"]
+    end
+
+
     respond_to do |format|
-      if @entry.update(update_params)
-        format.html { redirect_to @entry, status: 303, notice: 'Entry was successfully updated.' }
+      if @entry.update(entry_params)
+        format.html { redirect_to @entry, notice: 'Entry was successfully updated.' }
         format.json { render :show, status: :ok, location: @entry }
       else
         format.html { render :edit }

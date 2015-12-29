@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-
+<svg id="graph"></svg>
 <h1>My Latest Entries
   <%= link_to 'New Entry', new_entry_path, class: "btn btn-primary no-pad" %>
 </h1>
@@ -36,27 +36,4 @@
   </div>
   <% end %>
 
-</div>
-
-<div class="col-sm-4">
-  <div class="pageedge">
-
-    <h2>
-      Recent Entries
-    </h2>
-    <% @entries.order(updated_at: :desc ).each do |entry| %>
-    <div class="row">
-      <div class="container-fluid">
-        <%= entry.content %>
-        <p class="timetext">
-          <%=
-                 distance_of_time_in_words(entry.created_at, Time.now) + " ago"
-                 %></p>
-      </div>
-    </div>
-
-    <%end%>
-  </div>
-
-  <div class="row"></div>
 </div>

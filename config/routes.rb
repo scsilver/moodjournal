@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   resources :entries
   root to: "entries#index"
   post 'pusher/auth'
+  get 'negative', to: 'inquirer_class_databases#negative'
+  get 'positive', to: 'inquirer_class_databases#positive'
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

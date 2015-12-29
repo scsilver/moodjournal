@@ -4,8 +4,11 @@ class InquirerClassDatabasesController < ApplicationController
   # GET /inquirer_class_databases
   # GET /inquirer_class_databases.json
   def index
-    @inquirer_class_databases = InquirerClassDatabase.all
-    
+    if params[:query].present?
+      @inquirer_class_databases = InquirerClassDatabase.search(params[:query])
+    else
+      @inquirer_class_databases = InquirerClassDatabase.all
+    end
   end
 
   # GET /inquirer_class_databases/1
@@ -13,6 +16,12 @@ class InquirerClassDatabasesController < ApplicationController
   def show
   end
 
+  def negative
+    @inquirer_class_databases = InquirerClassDatabase.where.not('negative' => nil)
+  end
+  def positive
+    @inquirer_class_databases = InquirerClassDatabase.where.not('positive' => nil)
+  end
   # GET /inquirer_class_databases/new
   def new
     @inquirer_class_database = InquirerClassDatabase.new

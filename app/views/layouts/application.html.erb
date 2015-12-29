@@ -9,42 +9,14 @@
 
 
 </head>
-<div class="header">
-	<div class="container-fluid head">
-		<div class="row head">
-			<div class="col-md-1 head">
+
+<div class="nav_bar_top">
+  <p>Journal</p>
+</div>
+
 		<%= render 'layouts/user_auth_items' %>
-	</div>
-	<div class="col-md-8">
-	</div>
-				<div class="col-md-3 head">
-					<H4>Mood Journal</H4>
+    <%= yield %>
 
-	</div>
-	</div>
-</div>
-</div>
-
-<div class="body-entry">
-
-
-	<div class="push">
-	</div>
-	<div class="container-fluid">
-	  	<div class="row">
-	  		<div class="col-md-1">
-		  		</div>
-		  			<div class="col-md-10">
-		  				<div class="pageedge">
-		  				<div class="page">
-	  						<%= yield %>
-		  				</div>
-		  			</div>
-		  			</div>
-		  		<div class="col-md-1">
-		  	</div>
-	    </div>
-	</div>
   <script>
   var count = 0
     // Enable pusher logging - don't include this in production
@@ -115,20 +87,41 @@
     </script>
     <script>
     $(document).ready(function (e) {
-    var strArray = eval($("#hidden_array")[0].innerHTML);
-        var tmp = [];
-        var stmt = $("#result")[0].innerHTML;
-        var stmt_arry = stmt.split(" ");
-        $.each(strArray, function (i, vals) {
-            $.each(stmt_arry, function (j, sVal) {
-                if (sVal == vals) {
-                    stmt_arry[j] = "<b>" + sVal + "</b>";
-                }
-            });
-        });
-        var req_stmt = stmt_arry.join(" ");
-        $("#result").html(req_stmt);
+      var url_array = [['/negative.json',"<b class='word_negative'>","</b>"],['/positive.json',"<b class='word_positive'>","</b>"]]
+      $.each(url_array, function (k, sent) {
+        $.ajax({
+          url: sent[0],
+          type: 'GET',
+          dataType: 'json',
+          beforeSend: function (xhr) {
+              xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+          },
+          success: function(data){/* do something meaningful with data */
+            var str_array = data.map( function(item) {
+              return item.word;
+            })
 
+
+            var tmp = [];
+            var stmt = $("#result")[0].innerHTML;
+            var stmt_arry = stmt.split(" ");
+            $.each(str_array, function (i, vals) {
+                $.each(stmt_arry, function (j, sVal) {
+                    if (sVal == vals) {
+                        stmt_arry[j] = sent[1] + sVal + sent[2];
+                    }
+                });
+            });
+            var req_stmt = stmt_arry.join(" ");
+
+            $("#result").html(req_stmt);
+          },
+          error: function(xhr, status, response) {/* your error callback */}
+          });
+
+          });
         });
 </script>
+<script src="//d3js.org/d3.v3.min.js"></script>
+
 </html>

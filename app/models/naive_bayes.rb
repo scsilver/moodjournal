@@ -65,7 +65,7 @@ class NaiveBayes
       class_features.append(n[class_name])
     end
     prob_prior = class_features.count.to_f/@data_train.count.to_f
-    prob_class = (((class_features & feature_values).count.to_f)+1)/(class_count.to_f+@data_train.count.to_f)
+    prob_class = (((class_features & feature_values).count.to_f)+1)/(class_count.to_f*2)
 
     res = prob_class
     print class_name.to_s + " " + prob_class.to_s

@@ -44,9 +44,7 @@
 <% data.where("#{class_name} IS NOT NULL").each do |n| %>
 <%    class_features.append(n[class_name]) %>
 <% end %>
-<p style="visibility: hidden" id="hidden_array">
-  <%=class_features%>
-</p>
+
 
 
 
