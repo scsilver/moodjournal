@@ -1,14 +1,19 @@
 <p id="notice"><%= notice %></p>
 <svg id="graph"></svg>
-<h1>My Latest Entries
-  <%= link_to 'New Entry', new_entry_path, class: "btn btn-primary no-pad" %>
-</h1>
+<div class="container-fluid">
+  <div class="entry_title">
+    <h1>
+      My Latest Entries
+      <%= link_to 'New Entry', new_entry_path, class: "btn btn-primary no-pad" %>
+    </h1>
+  </div>
+</div>
 
-<div class="col-sm-8">
+<div class="container-fluid">
 
   <% @entries.where(user: current_user.id).order(updated_at: :desc ).each do |entry| %>
 
-  <div class="pageedge">
+  <div class="entry_card ">
     <div class="row">
       <div class="col-sm-10">
         <h4><%= entry.title %></h4>
@@ -16,11 +21,12 @@
 
         <div class="row">
           <p class="timetext">
-            <%= if entry.updated_at == entry.created_at
+          <%= if entry.updated_at == entry.created_at
                  "Created "+distance_of_time_in_words(entry.created_at, Time.now) + " ago"
                 else
                  "Updated "+distance_of_time_in_words(entry.created_at, Time.now) + " ago"
-               end%></p>
+               end%>
+          </p>
         </div>
       </div>
 
@@ -37,3 +43,86 @@
   <% end %>
 
 </div>
+
+<script>
+
+$.ajax({
+           type: "GET",
+           url: '/entries.json',
+           dataType: 'json',
+           async: true,
+           success: function (data) {
+             var set = []
+             var negativity = []
+             var positivity = []
+
+             $.each( data, function( key, value ) {
+                set.push([value.intensity]);
+                negativity.push([value.negative]);
+                positivity.push([value.positive]);
+
+
+
+             });
+
+             draw(set,negativity,positivity);
+
+           },
+           error: function (result) {
+               error();
+           }
+       });
+
+function draw(data,n,p) {
+    var color = d3.scale.category20b();
+    var width = 420,
+        barWidth = 20,
+        height = 50;
+
+    var y = d3.scale.linear()
+        .range([0, height])
+        .domain([0, d3.max(data)]);
+
+    var chart = d3.select("#graph")
+        .attr("width", barWidth*data.length)
+        .attr("height", height);
+
+    var bar = chart.selectAll("g")
+        .data(data)
+        .enter().append("g");
+
+
+    bar.append("rect")
+        .attr("width", barWidth-1)
+        .attr("height",  y)
+        .style("fill", function (d, i) {
+          var color= "";
+                  if (n[i] == "true") {
+                    color = "red";
+                  }
+                 if (p[i] == "true") {
+                 color = "green";
+                }
+                 return color;
+
+               })
+    bar.attr("transform", function (d, i) {
+                         return "translate(" + i * barWidth + ",0)";
+                     });
+
+    bar.append("text")
+        .attr("y", function (d) {
+                  return y(d)-10;
+              })
+        .attr("x", -5+barWidth / 2 )
+        .attr("dy", ".35em")
+        .style("fill", "white")
+        .text(function (d) {
+                  return parseInt(d*10000);
+              });
+}
+
+function error() {
+    console.log("error")
+}
+</script>

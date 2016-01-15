@@ -11,8 +11,7 @@
 </p>
 <%if @entry.negative%>
   <p id="setter">
-    <strong>Negative:</strong>
-    <%= @entry.negative %>
+    <strong>Negative</strong>
     <% class_name = "negative" %>
 
   </p>
@@ -27,9 +26,8 @@
 <%end%>
 <%if @entry.positive%>
 <p id="setter">
-  <strong>Positive:</strong>
-  <%= @entry.positive %>
-  <% class_name = "positive" %>
+  <strong>Positive</strong>
+    <% class_name = "positive" %>
   <strong>Intensity:</strong>
 
   <%= @entry.intensity %>

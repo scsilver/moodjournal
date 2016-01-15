@@ -5,123 +5,47 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-  <script src="https://js.pusher.com/3.0/pusher.min.js"></script>
 
 
 </head>
 
-<div class="nav_bar_top">
-  <p>Journal</p>
+<div class="navbar navbar-default">
+  <div class="navbar-container">
+    <div class="navbar-header">
+      <button class="navbar-toggle collapsed" data-target="#bs-navbar-collapse-1" data-toggle="collapse" type="button">
+        <span class="sr-only">Toggle Navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div class="navbar-brand">
+        <%= link_to "Mood Journal", root_path %>
+      </div>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+        <li>
+          <%= link_to "New Post", new_entry_path %>
+        </li>
+        <li>
+          <%= link_to "Logout", destroy_user_session_path, method: "delete" %>
+        </li>
+        <% else %>
+        <li>
+          <%= link_to "Login", new_user_session_path %>
+        </li>
+        <li>
+          <%= link_to "Register", new_user_registration_path %>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
 </div>
 
-		<%= render 'layouts/user_auth_items' %>
+  <div class="container-fluid" style="margin: auto; width: 50%;text-align: center;">
     <%= yield %>
+  </div>
 
-  <script>
-  var count = 0
-    // Enable pusher logging - don't include this in production
-    Pusher.log = function(message) {
-      if (window.console && window.console.log) {
-        window.console.log(message);
-      }
-    };
-
-    var pusher = new Pusher('60dbe63931b29368c58c', {
-      encrypted: true
-    });
-    var channel = pusher.subscribe('result_channel');
-
-    channel.bind('result_event', function(data) {
-      if (count == 0){
-      document.getElementById("class").innerHTML = data.prediction;
-      document.getElementById("prob").innerHTML = "Probability Negative: "+ data.probabilityn + "|| Probability Positive: "+  data.probabilityp;
-      if (data.prediction == 'negative') {
-        $.ajax({type: "PATCH", url: window.location.pathname , data: { "negative":true, "positive":false, "intensity":parseFloat(data.probabilityn)},cache: false,});
-        $('#setter').load(document.URL +  ' #setter');
-      }
-      if (data.prediction == 'positive') {
-        $.ajax({type: "PATCH", url: window.location.pathname , data: { "negative":false, "positive":true, "intensity":parseFloat(data.probabilityp)},cache: false,});
-        $('#setter').load(document.URL +  ' #setter');
-
-      }
-        count++
-      }
-
-
-    });
-  </script>
-  <script>
-  $( "#btnClick" ).click(function() {
-    console.log( "Handler for .click() called." );
-    count = 0
-    var entry = $('#entry').val();
-    var triggered = channel.trigger('client-command-event',  entry);
-  });
-  $( "#btnClick" ).keypress(function() {
-    if ( event.which == 13 ) {
-
-      console.log( "Handler for .keypress() called." );
-        count = 0
-
-        var entry = $('#entry').val();
-        var triggered = channel.trigger('client-command-event',  entry);
-
-      }
-  });
-
-  </script>
-  <script>
-      // Enable pusher logging - don't include this in production
-      Pusher.log = function(message) {
-        if (window.console && window.console.log) {
-          window.console.log(message);
-        }
-      };
-
-      var pusher = new Pusher('60dbe63931b29368c58c', {
-        encrypted: true
-      });
-      var channel = pusher.subscribe('private-command');
-      channel.bind('client-command-event', function(data) {
-      });
-    </script>
-    <script>
-    $(document).ready(function (e) {
-      var url_array = [['/negative.json',"<b class='word_negative'>","</b>"],['/positive.json',"<b class='word_positive'>","</b>"]]
-      $.each(url_array, function (k, sent) {
-        $.ajax({
-          url: sent[0],
-          type: 'GET',
-          dataType: 'json',
-          beforeSend: function (xhr) {
-              xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
-          },
-          success: function(data){/* do something meaningful with data */
-            var str_array = data.map( function(item) {
-              return item.word;
-            })
-
-
-            var tmp = [];
-            var stmt = $("#result")[0].innerHTML;
-            var stmt_arry = stmt.split(" ");
-            $.each(str_array, function (i, vals) {
-                $.each(stmt_arry, function (j, sVal) {
-                    if (sVal == vals) {
-                        stmt_arry[j] = sent[1] + sVal + sent[2];
-                    }
-                });
-            });
-            var req_stmt = stmt_arry.join(" ");
-
-            $("#result").html(req_stmt);
-          },
-          error: function(xhr, status, response) {/* your error callback */}
-          });
-
-          });
-        });
-</script>
-<script src="//d3js.org/d3.v3.min.js"></script>
 
 </html>
