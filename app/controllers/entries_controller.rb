@@ -5,7 +5,7 @@ class EntriesController < ApplicationController
   # GET /entries.json
 
 
-def index
+  def index
 
 
     if params[:query].present?
@@ -14,6 +14,7 @@ def index
     else
     @entries = Entry.all
     end
+  
   end
 
 
